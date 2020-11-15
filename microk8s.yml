@@ -1,0 +1,28 @@
+- hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Install aptitude for Ansible
+      raw: test -e /usr/bin/aptitude || (apt -y update && apt install -y aptitude)
+
+- hosts: all
+  gather_facts: true
+
+- hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: install microk8s
+      command: snap install microk8s --classic
+    - name: allow firewall pod-to-pod and pod-to-internet communication
+      command: ufw allow in on cni0 && sudo ufw allow out on cni0 && ufw default allow routed
+    - name: enable addons
+      command: microk8s enable dns dashboard storage
+    - apt_key: url=https://packages.cloud.google.com/apt/doc/apt-key.gpg state=present
+    - apt_repository: repo={{ item }} state=present
+      with_items:
+        - deb http://apt.kubernetes.io/ kubernetes-xenial main
+    - package: name={{ item }} state=latest
+      with_items:
+        - kubectl        
+        - kubectx
