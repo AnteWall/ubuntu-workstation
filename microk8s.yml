@@ -15,7 +15,19 @@
     - name: install microk8s
       command: snap install microk8s --classic
     - name: allow firewall pod-to-pod and pod-to-internet communication
-      command: sudo ufw allow in on cni0 && sudo ufw allow out on cni0 && sudo ufw default allow routed
+      ufw:
+        direction: in
+        interface: cni0
+        rule: allow
+    - name: allow firewall pod-to-pod and pod-to-internet communication
+      ufw:
+        direction: out
+        interface: cni0
+        rule: allow
+    - name: allow firewall pod-to-pod and pod-to-internet communication
+      ufw:
+        direction: routed
+        rule: allow
     - name: enable addons
       command: microk8s enable dns dashboard storage
     - apt_key: url=https://packages.cloud.google.com/apt/doc/apt-key.gpg state=present
