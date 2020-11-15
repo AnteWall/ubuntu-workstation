@@ -23,7 +23,8 @@ Installs `docker`, `net-tools`, `curl`, `ubuntu-drivers-common`, `nvidia-drivers
 
 #### REBOOT AFTER THIS SCRIPT
 
-
 #### `microk8s.yml`
 
 Installs `microk8s`, `kubectl`, `helm`
+
+#### REBOOT AFTER THIS SCRIPT
