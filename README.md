@@ -19,4 +19,4 @@ ansible-playbook -i "localhost," -c local filename.yml --ask-become-pass
 
 #### `common.yml`
 
-Installs `docker`, `net-tools`, `curl`, `ubuntu-drivers-common`
+Installs `docker`, `net-tools`, `curl`, `ubuntu-drivers-common`, `nvidia-drivers`
