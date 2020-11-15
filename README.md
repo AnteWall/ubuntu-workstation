@@ -5,8 +5,18 @@ sudo apt -y update
 sudo apt-get -y install ssh ansible git aptitude wget unzip
 ```
 
-## Run script
+### Download git repo
+
+```bash
+git clone https://github.com/AnteWall/ubuntu-workstation.git
+```
+
+### Run script
 
 ```bash
 ansible-playbook -i "localhost," -c local filename.yml --ask-become-pass 
 ```
+
+#### `common.yml`
+
+Installs `docker`, `net-tools`, `curl`, `ubuntu-drivers-common`

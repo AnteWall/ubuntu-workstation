@@ -1,0 +1,23 @@
+- hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Install aptitude for Ansible
+      raw: test -e /usr/bin/aptitude || (apt -y update && apt install -y aptitude)
+
+- hosts: all
+  gather_facts: true
+
+- hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - apt_key: https://download.docker.com/linux/ubuntu/gpg
+    - package: name={{ item }} state=latest
+      with_items:
+      - curl
+      - ubuntu-drivers-common
+      - net-tools
+      - docker-ce 
+      - docker-ce-cli
+      - containerd.io
