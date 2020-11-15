@@ -31,10 +31,12 @@
     - name: enable addons
       command: microk8s enable dns dashboard storage
     - apt_key: url=https://packages.cloud.google.com/apt/doc/apt-key.gpg state=present
+    - apt_key: url=https://baltocdn.com/helm/signing.asc state=present
     - apt_repository: repo={{ item }} state=present
       with_items:
         - deb http://apt.kubernetes.io/ kubernetes-xenial main
+        - deb https://baltocdn.com/helm/stable/debian/ all main
     - package: name={{ item }} state=latest
       with_items:
         - kubectl        
-        - kubectx
+        - helm
