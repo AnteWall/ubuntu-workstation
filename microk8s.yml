@@ -26,6 +26,7 @@
         rule: allow
     - name: allow firewall pod-to-pod and pod-to-internet communication
       ufw:
+        state: enabled
         direction: routed
     - name: enable addons
       command: microk8s enable dns dashboard storage
