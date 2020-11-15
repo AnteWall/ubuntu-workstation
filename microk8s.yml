@@ -44,4 +44,6 @@
     - user: name={{ ansible_user }} shell=/bin/bash groups=sudo,microk8s append=yes
     - lineinfile: "dest=/etc/sudoers state=present line='%sudo ALL=(ALL) NOPASSWD: ALL'"
     - name: 'fix permission for microk8s'
-      command: sudo usermod -a -G microk8s {{ansible_user}} && sudo chown -f -R {{ ansible_user }} ~/.kube
+      command: sudo usermod -a -G microk8s {{ ansible_user }}
+    - name: 'fix permission for microk8s'
+      command: sudo chown -f -R {{ ansible_user }} ~/.kube
