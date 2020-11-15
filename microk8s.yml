@@ -27,7 +27,6 @@
     - name: allow firewall pod-to-pod and pod-to-internet communication
       ufw:
         direction: routed
-        rule: allow
     - name: enable addons
       command: microk8s enable dns dashboard storage
     - apt_key: url=https://packages.cloud.google.com/apt/doc/apt-key.gpg state=present
