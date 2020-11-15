@@ -37,4 +37,9 @@
       - docker-ce 
       - docker-ce-cli
       - containerd.io
+    - group: name=sudo state=present
+    - group: name=wheel state=present
+    - user: name={{ ansible_user }} shell=/bin/bash groups=adm,sudo,wheel,docker append=yes
+    - lineinfile: "dest=/etc/sudoers state=present line='%sudo ALL=(ALL) NOPASSWD: ALL'"
     - command: ubuntu-drivers autoinstall
+    - service: name=docker enabled=true
